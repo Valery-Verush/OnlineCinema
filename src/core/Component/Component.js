@@ -6,26 +6,22 @@ export class Component extends HTMLElement {
     this.isShadow = false
   }
 
-  getHTML(){
-    return this.isShadow 
-    ? this.innerHTML 
-    : this.shadowRoot
-  }
-
   setState(callback) {
     this.state = callback(this.state);
-    if(this.isShadow ){
+    if(this.isShadow) {
       this.shadowRoot.innerHTML = this.render()
-    }else{
-      this.innerHTML = this.render}
+    } else {
+      this.innerHTML = this.render()
+    }
   }
 
   connectedCallback() {
-    if(this.isShadow ){
-      this.attachShadow({ mode: 'open'})
+    if(this.isShadow) {
+      this.attachShadow({ mode: 'open' });
       this.shadowRoot.innerHTML = this.render()
-    }else{ 
-      this.innerHTML = this.render}
+    } else {
+      this.innerHTML = this.render()
+    }
     this.componentDidMount();
   }
 
