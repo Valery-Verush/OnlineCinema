@@ -1,7 +1,7 @@
 const generateMovies = (gty) =>{
     return new Array(gty).fill(null).map((_, index) =>({
         id:index,
-        title: `Movie ${index + 1}`,
+        title: `Movie ${index }`,
         rating: Math.ceil(Math.random(index) * 5 ),
         poster: `movie${index + 1}.jpg`,
         comments:[

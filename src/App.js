@@ -1,38 +1,76 @@
-import { Component } from "./core";
-import './components'
+import * as core from "./core";
+import "./components";
 import { movieService } from "./services/MovieService";
-export class App extends Component {
-
-  constructor(){
+export class App extends core.Component {
+  constructor() {
     super(),
-    this.state = {
+      (this.state = {
         movies: [],
-        searchValue: '',
-        selectedCategory: ''
-    }
-    
-}
+        searchValue: "",
+        selectedCategory: "",
+      });
+  }
 
-  componentDidMount() {
-    movieService.getAllMovies()
-    .then(({data}) => {
-      this.setState((state) =>{
+  getMovies() {
+    movieService.getAllMovies().then(({ data }) => {
+      this.setState((state) => {
         return {
           ...state,
-          movies: data
-        }
-      })
-    })
+          movies: data,
+        };
+      });
+    });
   }
-  render() {
-    return`
-    <div id="shell">
-      <it-header></it-header>
-      <it-cinema-card></it-cinema-card>
-    </div>
 
-    `
+  componentDidMount() {
+    this.getMovies();
+  }
+
+  render() {
+    return `
+    <div id="shell">
+      <it-router>
+
+        <nav>
+          <ul>
+            <li>
+              <it-link to="/">Home</it-link>
+            </li>
+            <li>
+              <it-link to="/admin">Admin</it-link>
+            </li>
+          <ul>
+        </nav>
+
+        <it-route path="/" component="home-page" title='Home Page'></it-route>
+        <it-route path="/admin" component="admin-page" title='Admin Page'></it-route>
+        <it-route path="//movies/:id" component="movie-page" title='Movie Detail Page'></it-route>
+        <it-route path="*" component="error-page"></it-route>
+
+        <it-outlet></it-outlet>
+
+      </it-router>
+    </div>
+    `;
   }
 }
 
 customElements.define("my-app", App);
+
+{
+  /* <it-header></it-header>
+${this.state.movies.map(({title, rating, id, poster, comments}) => {
+  return`
+  <it-cinema-card
+  id="${id}"
+  title="${title}"
+  poster="${poster}"
+  rating="${rating}"
+  comments='${JSON.stringify(comments)}'
+  ></it-cinema-card>
+  `
+}).join(" ")}
+<it-cinema-card
+poster="${this.state.movies.poster}"
+></it-cinema-card> */
+}
