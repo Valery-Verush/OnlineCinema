@@ -1,2 +1,1 @@
-export * from'./Anmin';
-export * from'./Home';
+export * from "./Home/Home";

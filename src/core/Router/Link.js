@@ -1,18 +1,18 @@
 import { Component } from "../Component";
 
-export class Link extends Component{
+export class Link extends Component {
     constructor() {
         super();
         this.isShadow = true
     }
 
     static get observedAttributes() {
-        return ["to"]
+        return ['to']
     }
 
     onClick = (evt) => {
         evt.preventDefault();
-        this.dispatch('change-route', { target: this.props.to})
+        this.dispatch('change-route', { target: this.props.to })
     }
 
     componentDidMount() {
@@ -24,14 +24,12 @@ export class Link extends Component{
     }
 
     render() {
-        return`
-        <a href="${this.props.to}">
-        <slot></slot>
-        </a>
-        
-        `
+        return `
+            <a href="${this.props.to}">
+                <slot></slot>
+            </a>
+        `;
     }
-    
-}
+} 
 
-customElements.define('it-link',Link)
+customElements.define('it-link', Link)
