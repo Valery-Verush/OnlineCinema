@@ -1,1 +1,1 @@
-# OnlineCinema
+# mentoring-simple-webpack-starter
